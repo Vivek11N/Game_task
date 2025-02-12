@@ -1,3 +1,29 @@
+// Check if the modal has been shown already during this session
+window.onload = function() {
+    if (!localStorage.getItem('modalShown')) {
+        // Show the modal if it's the first time loading the page
+        document.getElementById('modal').style.display = "block";
+        // Set localStorage to ensure it doesn't show again
+        localStorage.setItem('modalShown', 'true');
+    }
+};
+
+function closeModal() {
+    // Hide the modal when the button is clicked
+    document.getElementById('modal').style.display = "none";
+}
+
+function startGame() {
+    // Hide the intro screen and show the game container
+    document.getElementById('intro-container').style.display = "none";
+    document.getElementById('game-container').style.display = "block";
+}
+
+function loadArena(arena) {
+    // Handle loading the selected arena based on the user's choice
+    console.log("Loading arena:", arena);
+    // You can replace this with logic to load the respective game stages
+}
 
 window.onload = function() {
     // Show the logo for 3 seconds before showing the arena buttons
@@ -8,7 +34,7 @@ window.onload = function() {
     setTimeout(function() {
         logo.style.display = 'none'; // Hide the logo
         choices.style.display = 'block'; // Show the arena buttons
-    }, 3000); // 3 seconds
+    }, 5000); // 3 seconds
 }
 // Function to check the selected answer
 function checkAnswer(optionIndex, arena) {
@@ -27,32 +53,35 @@ function checkAnswer(optionIndex, arena) {
 
 
 let currentStage = 0;
+// Create an Audio object for the winner music
+const winnerAudio = new Audio('winner-255094.mp3'); // Replace with the correct path to your music file
+const loserAudio=new Audio('girl-screaming-sound-effect-259472.mp3')
 const stages = {
     train: [
         { 
-            description: "Find the train ticket hidden in the abandoned station.",
+            description: "You were placed infront of train station and you need to have ticket to get an entry to it.The ticket is hidden somw where inside the train satation it self you can find it from the clue on image",
             success: null, 
             image: "1.jpeg", 
             options: [
-                { text: "Look under the floorboards", isCorrect: true },
-                { text: "Search the cabinet", isCorrect: false },
+                { text: "Look floorboards", isCorrect: true },
+                { text: "Search cabinet", isCorrect: false },
                 { text: "Check the clock", isCorrect: false },
                 { text: "Open the safe", isCorrect: false }
             ]
         },
         { 
-            description: "Fix the broken train engine before zombies arrive.", 
+            description: "Once you arrive infront of the tain there was some problem with the engine rectify that from clues in image .....to start engine other wise zombie will catch you", 
             success: null, 
             image: "2.jpeg", 
             options: [
-                { text: "Check the fuel levels", isCorrect: false },
-                { text: "Replace a broken part", isCorrect: false },
-                { text: "Turn on the engine power", isCorrect: true },
+                { text: "Check fuel levels", isCorrect: false },
+                { text: "Replace broken part", isCorrect: false },
+                { text: "Turn on  engine ", isCorrect: true },
                 { text: "Call for maintenance", isCorrect: false }
             ]
         },
         { 
-            description: "Defend yourself from an infected passenger!", 
+            description: "once you borded the tarin you find that one of the co-passenger is also affected from the virus what will you do...................", 
             success: null, 
             image: "3.jpeg", 
             options: [
@@ -71,35 +100,35 @@ const stages = {
     ],
     military: [
         { 
-            description: "Locate the secret keycard to open the military base's main gate.",
+            description: "In the zombie attack you were on an arena of military base and you were infront of the army base protected by large number of solder no time to convice a soldier to entre on it what will you do",
             success: null, 
             image: "ml3.png", 
             options: [
                 { text: "Search the guard's locker", isCorrect: false },
-                { text: "Jump the wall of military base", isCorrect: true },
+                { text: "Jump wall of military base", isCorrect: true },
                 { text: "Look in the armory", isCorrect: false },
                 { text: "Ask a soldier for help", isCorrect: false }
             ]
         },
         { 
-            description: "Defend the base's entrance from a zombie horde.", 
+            description: "As so much Zombie are coming and you are only few in number with the tools provide what will you chose defend the base's entrance from a zombie horde.", 
             success: null, 
             image: "45.jpeg", 
             options: [
-                { text: "Use the mounted machine gun", isCorrect: true },
+                { text: "Use mounted machine gun", isCorrect: true },
                 { text: "Take cover and wait", isCorrect: false },
                 { text: "Throw grenades", isCorrect: false },
                 { text: "Fight hand-to-hand", isCorrect: false }
             ]
         },
         { 
-            description: "Repair the helicopter before escaping.", 
+            description: "On the army base there was an  helicopter with some technical problem but can fly ,what will you do in this situation.", 
             success: null, 
             image: "13.jpeg", 
             options: [
                 { text: "Fix the rotor blades", isCorrect: false },
                 { text: "Check the fuel levels", isCorrect: false },
-                { text: "Activate the emergency override", isCorrect: true },
+                { text: "Activate emergency override", isCorrect: true },
                 { text: "Search for repair tools", isCorrect: false }
             ]
         },
@@ -112,14 +141,14 @@ const stages = {
     ],
     tunnel: [
         { 
-            description: "Find your way through the underground tunnel system.",
+            description: "You have been placed infornt of tunnel and the zombies are following you take the right path based on the inidication given",
             success: null, 
             image: "78.png", 
             options: [
-                { text: "Follow the left path", isCorrect: false },
-                { text: "Follow the right path", isCorrect: true },
+                { text: "Follow left path", isCorrect: false },
+                { text: "Follow right path", isCorrect: true },
                 { text: "Climb the ladder", isCorrect: false },
-                { text: "Stay put and wait for help", isCorrect: false }
+                { text: "wait for help", isCorrect: false }
             ]
         },
         { 
@@ -128,9 +157,9 @@ const stages = {
             image: "86.png", 
             options: [
                 { text: "Try entering random numbers", isCorrect: false },
-                { text: "Search for a hidden clue on the walls", isCorrect: true },
-                { text: "Look for a keycard nearby", isCorrect: false },
-                { text: "Force the door open with your shoulder", isCorrect: false }
+                { text: "Search hidden clue on walls", isCorrect: true },
+                { text: "Look keycard nearby", isCorrect: false },
+                { text: "Force the door with your shoulder", isCorrect: false }
             ]
         },
         { 
@@ -138,7 +167,7 @@ const stages = {
             success: null, 
             image: "56.jpeg", 
             options: [
-                { text: "Use a flashlight to blind them", isCorrect: false },
+                { text: "Use flashlight to blind them", isCorrect: false },
                 { text: "Fight them with a crowbar", isCorrect: true },
                 { text: "Use a grenade", isCorrect: false },
                 { text: "Run past them", isCorrect: false }
@@ -284,6 +313,9 @@ function nextStage(arena) {
         document.getElementById("game-stage").innerHTML = stageContent;
         currentStage++;
     } else {
+        winnerAudio.play();
+        const introAudio = document.getElementById("intro-audio");
+        introAudio.pause()
         // Redirect to the arena selection page once the game is completed
         document.getElementById("game-stage").innerHTML = 
             `<h2>The escape was successful! Survivors are free to enjoy!</h2>
@@ -292,10 +324,17 @@ function nextStage(arena) {
 }
 function showInfectionFeedback(arena) {
     const gameStage = document.getElementById("game-stage");
+    loserAudio.play();
+    
+    const introAudio = document.getElementById("intro-audio");
+    introAudio.pause();
+
     const feedbackContent = `
         <h2>Oh no! You've made the wrong choice...</h2>
         <p>You have been infected by the zombie virus and have turned into a zombie!</p>
+        <img src="777.jpeg" alt="Infected Zombie" style="width: 300px; height: auto; display: block; margin: 20px auto;">
         <button onclick="window.location.href='index.html'">Go Back to Arena Selection</button>
     `;
+    
     gameStage.innerHTML = feedbackContent; // Update the game stage with the infection message
 }
