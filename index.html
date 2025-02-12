@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zombie Escape Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+    <!-- Intro Screen -->
+    <div id="intro-container">
+        <img src="12.png" alt="Zombie Escape Intro" id="intro-image">
+        <audio id="intro-audio" loop><source src="scary-dark-trailer-146541.mp3" type="audio/mpeg"></audio>
+
+        <button id="start-button" onclick="startGame()">Start Game</button>
+    </div>
+
+    <!-- Full-screen Logo -->
+    <div id="logo-container">
+        <div id="logo">
+            <img src="escape1.png" alt="Zombie Escape Logo">
+        </div>
+    </div>
+
+    <!-- Game Container (Hidden initially) -->
+    <div id="game-container" style="display: none;">
+        <div id="choices">
+            <h1>Zombie Escape</h1>
+            <p id="story">The city is under attack by a zombie virus! Choose your escape route:</p>
+
+            <div class="card-container">
+                <div class="card" onclick="loadArena('train')">
+                    <div class="card-image">
+                        <img src="7.webp" alt="Train Escape">
+                    </div>
+                    <div class="card-content">
+                        <h2>Escape by Train</h2>
+                        <p>Board a speeding train while evading zombies inside the compartments.</p>
+                    </div>
+                </div>
+            
+                <div class="card" onclick="loadArena('military')">
+                    <div class="card-image">
+                        <img src="6.webp" alt="Military Evacuation">
+                    </div>
+                    <div class="card-content">
+                        <h2>Military Evacuation</h2>
+                        <p>Reach the military safe zone before it's too late.</p>
+                    </div>
+                </div>
+            
+                <div class="card" onclick="loadArena('tunnel')">
+                    <div class="card-image">
+                        <img src="9.png" alt="Underground Tunnels">
+                    </div>
+                    <div class="card-content">
+                        <h2>Underground Tunnels</h2>
+                        <p>Navigate the dark tunnels while avoiding lurking zombies.</p>
+                    </div>
+                </div>
+            
+                <div class="card" onclick="loadArena('rooftop')">
+                    <div class="card-image">
+                        <img src="8.webp" alt="Rooftop Helicopter">
+                    </div>
+                    <div class="card-content">
+                        <h2>Rooftop Helicopter</h2>
+                        <p>Make your way to the rooftop for a helicopter escape.</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div id="game-stage"></div>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
