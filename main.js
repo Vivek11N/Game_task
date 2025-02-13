@@ -1,51 +1,38 @@
-// Check if the modal has been shown already during this session
-window.onload = function() {
-    if (!localStorage.getItem('modalShown')) {
-        // Show the modal if it's the first time loading the page
-        document.getElementById('modal').style.display = "block";
-        // Set localStorage to ensure it doesn't show again
-        localStorage.setItem('modalShown', 'true');
-    }
-};
 
-function closeModal() {
-    // Hide the modal when the button is clicked
-    document.getElementById('modal').style.display = "none";
-}
 
 function startGame() {
-    // Hide the intro screen and show the game container
+    
     document.getElementById('intro-container').style.display = "none";
     document.getElementById('game-container').style.display = "block";
 }
 
 function loadArena(arena) {
-    // Handle loading the selected arena based on the user's choice
+    
     console.log("Loading arena:", arena);
-    // You can replace this with logic to load the respective game stages
+    
 }
 
 window.onload = function() {
-    // Show the logo for 3 seconds before showing the arena buttons
+    
     const logo = document.getElementById('logo');
     const choices = document.getElementById('choices');
 
-    // Show the logo for 3 seconds
+    
     setTimeout(function() {
-        logo.style.display = 'none'; // Hide the logo
-        choices.style.display = 'block'; // Show the arena buttons
-    }, 5000); // 3 seconds
+        logo.style.display = 'none'; 
+        choices.style.display = 'block'; 
+    }, 5000); 
 }
-// Function to check the selected answer
+
 function checkAnswer(optionIndex, arena) {
-    const stage = stages[arena][currentStage - 1]; // Get the current stage based on the arena
+    const stage = stages[arena][currentStage - 1]; 
 
     if (stage.options[optionIndex].isCorrect) {
-        // If the answer is correct, go to the next stage
+        
         
         nextStage(arena);
     } else {
-        // If the answer is wrong, give feedback
+        
         showInfectionFeedback(arena);
     }
 }
@@ -53,8 +40,7 @@ function checkAnswer(optionIndex, arena) {
 
 
 let currentStage = 0;
-// Create an Audio object for the winner music
-const winnerAudio = new Audio('winner-255094.mp3'); // Replace with the correct path to your music file
+const winnerAudio = new Audio('winner-255094.mp3'); 
 const loserAudio=new Audio('girl-screaming-sound-effect-259472.mp3')
 const stages = {
     train: [
@@ -83,7 +69,7 @@ const stages = {
         { 
             description: "once you borded the tarin you find that one of the co-passenger is also affected from the virus what will you do...................", 
             success: null, 
-            image: "3.jpeg", 
+            image: "444.jpeg", 
             options: [
                 { text: "Fight the infected with a knife", isCorrect: false },
                 { text: "Try to escape by running", isCorrect: false },
@@ -163,7 +149,7 @@ const stages = {
             ]
         },
         { 
-            description: "Defend against zombies in the dark, narrow passage.",
+            description: "Once you were passing through the tunnel you may found that 2 reching out you look at the picture and ftch appropriate clue",
             success: null, 
             image: "56.jpeg", 
             options: [
@@ -174,7 +160,7 @@ const stages = {
             ]
         },
         { 
-            description: "Escape through the tunnel's emergency exit.",
+            description: "wow you have reached one of the emergency exit of the tunnel which will oepn to the new city where the virsu is not effected",
             success: true,  
             image: "88.png", 
             options: null 
@@ -182,7 +168,7 @@ const stages = {
     ],
     rooftop: [
         { 
-            description: "Activate the rooftop emergency signal to call for a helicopter.",
+            description: "You will be placed on the top of a sky scrapper having helipad found out somethings from the table image to attract the helicopter evacuation team towards you",
             success: null, 
             image: "rf1.png", 
             options: [
@@ -193,14 +179,14 @@ const stages = {
             ]
         },
         { 
-            description: "Defend yourself from the infected while waiting for the helicopter.",
+            description: "Until the time you wait for helicopter evacuation team to reach you ,you may foud that some of the virus infected persons are approcing you.",
             success: null, 
             image: "rf2.jpeg", 
             options: [
                 
                 { text: "Throw objects at them", isCorrect: false },
-                { text: "Run to the other side of the roof", isCorrect: false },
-                { text: "Shoot them from a distance", isCorrect: true },
+                { text: "Run to other side of roof", isCorrect: false },
+                { text: "Shoot them from  distance", isCorrect: true },
                 { text: "Use a smoke grenade", isCorrect: false }
             ]
         },
@@ -227,34 +213,34 @@ const stages = {
     ]
 };
 
-// Function to load the chosen arena and start the game
-// Function to load the chosen arena and start the game
+
+
 function loadArena(arena) {
-    currentStage = 0; // Reset to the first stage
+    currentStage = 0; 
     const gameStage = document.getElementById('game-stage');
     const story = document.getElementById('story');
     const choices = document.getElementById('choices');
-    // Clear choices after selecting
+    
     choices.innerHTML = '';
 
     switch (arena) {
         case 'train':
             story.innerHTML = 'You are at the train station. You must board the train before the zombies overrun the station. Solve the puzzle to open the gate!';
-            nextStage('train'); // Start the train escape sequence
+            nextStage('train'); 
             break;
         case 'military':
             story.innerHTML = 'You arrive at the military base. They are evacuating survivors, but they won’t let anyone through unless you pass their security challenge.';
-            // Call a function to start the military arena
+            
             nextStage('military');
             break;
         case 'tunnel':
             story.innerHTML = 'The underground tunnels are dark and dangerous. Solve the escape route puzzle to find the exit before time runs out!';
-            // Call a function to start the tunnel escape
+            
             nextStage('tunnel');
             break;
         case 'rooftop':
             story.innerHTML = 'The rooftop is surrounded by zombies, and the helicopter is running out of time. Solve the helicopter puzzle to escape!';
-            // Call a function to start the rooftop escape
+            
             nextStage('rooftop');
             break;
         default:
@@ -262,15 +248,15 @@ function loadArena(arena) {
             break;
     }
     
-    // Show the details section
-    gameStage.style.display = 'block'; // Ensure the game stage is visible
+    
+    gameStage.style.display = 'block'; 
 }
 
 
-// Function to start the game and display the first stage
+
 function startEscape(arena) {
-    currentStage = 0;  // Reset to the first stage
-    nextStage(arena);  // Move to the next stage
+    currentStage = 0;  
+    nextStage(arena);  
 }
 function startGame() {
 
@@ -279,19 +265,18 @@ function startGame() {
     document.getElementById("intro-container").addEventListener("click", function() {
         const introAudio = document.getElementById("intro-audio");
         
-        // Play the audio when the user clicks
+        
         introAudio.play();
     
-        // Hide the intro screen and show the game screen after the audio starts
+        
         document.getElementById("intro-container").style.display = "none";
         document.getElementById("game-container").style.display = "block";})
 }
 
-/// Function to load the next stage based on current progress
 function nextStage(arena) {
     if (currentStage < stages[arena].length) {
         const stage = stages[arena][currentStage];
-        let stageContent = `<p>${stage.description}</p>`; // Fix: use backticks for template literals
+        let stageContent = `<p>${stage.description}</p>`; 
 
         if (stage.image) {
             stageContent += 
@@ -307,8 +292,7 @@ function nextStage(arena) {
             });
             stageContent += '</div>';
         } else if (stage.success !== null) {
-            stageContent += `<button onclick="nextStage('${arena}')">Next</button>`; // Fix: use backticks
-        }
+            stageContent += `<button onclick="nextStage('${arena}')">Next</button>`;       }
 
         document.getElementById("game-stage").innerHTML = stageContent;
         currentStage++;
@@ -316,11 +300,10 @@ function nextStage(arena) {
         winnerAudio.play();
         const introAudio = document.getElementById("intro-audio");
         introAudio.pause()
-        // Redirect to the arena selection page once the game is completed
+        
         document.getElementById("game-stage").innerHTML = 
             `<h2>The escape was successful! Survivors are free to enjoy!</h2>
-            <button onclick="window.location.href='index.html'">Play Again</button>`; // Fix: use backticks
-    }
+            <button onclick="window.location.href='index.html'">Play Again</button>`;     }
 }
 function showInfectionFeedback(arena) {
     const gameStage = document.getElementById("game-stage");
@@ -336,5 +319,5 @@ function showInfectionFeedback(arena) {
         <button onclick="window.location.href='index.html'">Go Back to Arena Selection</button>
     `;
     
-    gameStage.innerHTML = feedbackContent; // Update the game stage with the infection message
+    gameStage.innerHTML = feedbackContent; 
 }
